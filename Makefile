@@ -36,7 +36,7 @@ test-unit-cov: clean sanitize build
 	hack/coverage.sh
 
 docker-container:
-	docker build --pull -t $(PREFIX)/kube-eventer-$(ARCH):$(VERSION)-$(GIT_COMMIT)-aliyun -f deploy/Dockerfile .
+	docker buildx build --platform linux/amd64 -t fevirtus/kube-eventer:latest -f deploy/Dockerfile .
 
 clean:
 	rm -f kube-eventer
