@@ -66,7 +66,7 @@ func (sink *amqpSink) ProduceAmqpMessage(msgData interface{}) error {
 	err = sink.producer.PublishWithContext(
 		ctx,
 		sink.dataTopic,
-		"#",
+		"",
 		false,
 		false,
 		amqp.Publishing{
