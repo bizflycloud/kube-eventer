@@ -1,9 +1,9 @@
 FROM golang:1.19.3 AS build-env
-ADD . /src/github.com/AliyunContainerService/kube-eventer
-ENV GOPATH /:/src/github.com/AliyunContainerService/kube-eventer/vendor
+ADD . /src/github.com/bizflycloud/kube-eventer
+ENV GOPATH /:/src/github.com/bizflycloud/kube-eventer/vendor
 ENV GO111MODULE on
 ENV GOPROXY=https://goproxy.cn,direct
-WORKDIR /src/github.com/AliyunContainerService/kube-eventer
+WORKDIR /src/github.com/bizflycloud/kube-eventer
 RUN apt-get update -y && apt-get install gcc ca-certificates
 RUN make
 
@@ -12,7 +12,7 @@ FROM alpine:3.11.6
 
 RUN apk --no-cache --update upgrade
 
-COPY --from=build-env /src/github.com/AliyunContainerService/kube-eventer/kube-eventer /
+COPY --from=build-env /src/github.com/bizflycloud/kube-eventer/kube-eventer /
 COPY --from=build-env /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 ENV TZ "Asia/Shanghai"
